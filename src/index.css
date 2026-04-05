@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Light mode defaults */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #F5F7FA;
+  --bg-card: #ffffff;
+  --bg-sidebar: #ffffff;
+  --bg-navbar: #ffffff;
+  --text-primary: #343C6A;
+  --text-secondary: #718EBF;
+  --text-heading: #232323;
+  --border-color: #DFEAF2;
+  --input-bg: #F5F7FA;
+  --shadow: rgba(0,0,0,0.05);
+}
+
+/* Dark mode overrides */
+.dark {
+  --bg-primary: #1a1f36;
+  --bg-secondary: #111827;
+  --bg-card: #1e2745;
+  --bg-sidebar: #161b33;
+  --bg-navbar: #161b33;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-heading: #f1f5f9;
+  --border-color: #2d3748;
+  --input-bg: #2d3748;
+  --shadow: rgba(0,0,0,0.3);
+}
+
+/* Apply theme vars to base elements */
+body {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode overrides for white backgrounds */
+.dark .bg-white {
+  background-color: var(--bg-card) !important;
+}
+
+.dark .bg-custom-primary-3 {
+  background-color: var(--input-bg) !important;
+}
+
+.dark .border-\[\#DFEAF2\] {
+  border-color: var(--border-color) !important;
+}
+
+.dark .text-black,
+.dark .text-\[\#232323\] {
+  color: var(--text-heading) !important;
+}
+
+.dark .text-custom-primary-1,
+.dark .text-\[\#343C6A\] {
+  color: var(--text-primary) !important;
+}
+
+.dark .text-custom-primary-2,
+.dark .text-\[\#718EBF\] {
+  color: var(--text-secondary) !important;
+}
+
+.dark .text-\[\#8BA3CB\] {
+  color: var(--text-secondary) !important;
+}
+
+/* Sidebar dark */
+.dark #side-menu {
+  background-color: var(--bg-sidebar) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Navbar dark */
+.dark .fixed.bg-white {
+  background-color: var(--bg-navbar) !important;
+}
+
+/* Inputs dark */
+.dark input,
+.dark select,
+.dark textarea {
+  background-color: var(--input-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dark input::placeholder {
+  color: var(--text-secondary) !important;
+}
+
+/* Card dark */
+.dark .rounded-\[1\.5625rem\] {
+  background-color: var(--bg-card);
+}
+
+/* Hover states dark */
+.dark .hover\:bg-\[\#F5F7FA\]:hover {
+  background-color: var(--input-bg) !important;
+}
+
+.dark .bg-\[\#F5F7FA\] {
+  background-color: var(--input-bg) !important;
+}
+
+.dark .bg-\[\#EEF0FA\] {
+  background-color: rgba(52, 60, 106, 0.4) !important;
+}
+
+.dark .bg-\[\#EDFAF6\] {
+  background-color: rgba(65, 212, 168, 0.12) !important;
+}
+
+.dark .bg-\[\#FFF0F0\] {
+  background-color: rgba(255, 75, 74, 0.12) !important;
+}
+
+.dark .bg-\[\#FFF9EE\] {
+  background-color: rgba(255, 181, 71, 0.12) !important;
+}
+
+.dark .bg-\[\#F3EEFF\] {
+  background-color: rgba(123, 94, 167, 0.2) !important;
+}
+
+.dark .bg-\[\#E0F7FB\] {
+  background-color: rgba(8, 145, 178, 0.15) !important;
+}
+
+.dark .border-\[\#F5F7FA\] {
+  border-color: var(--border-color) !important;
+}
+
+/* Table rows dark */
+.dark tbody tr {
+  border-color: var(--border-color) !important;
+}
+
+/* Gradient card dark - keep the card gradients as-is */
+.dark .bg-gradient-to-br {
+  /* gradient cards stay dark naturally */
+}
+
+/* Smooth transitions for all elements */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
