@@ -162,7 +162,7 @@ const AuthNavBar = () => {
             <img src="/assets/icons/notification-icon.svg" alt="Notification" />
           </div>
           <img
-            src="/assets/images/avatar-cartoon.svg"
+            src="/assets/images/profile.png"
             alt="User Profile"
             className="w-[3.75rem] h-[3.75rem] rounded-full object-cover flex-shrink-0 ring-2 ring-[#DFEAF2]"
           />
@@ -200,7 +200,7 @@ const AuthNavBar = () => {
           </div>
 
           <img
-            src="/assets/images/avatar-cartoon.svg"
+            src="/assets/images/profile.png"
             alt="User Profile"
             className="w-[2.1875rem] h-[2.1875rem] rounded-full object-cover ring-2 ring-[#DFEAF2]"
           />
