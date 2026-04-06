@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { selectAllTransactions } from "../store/selectors/transactionSelectors";
 import { formatDate } from "../utils/constants";
+import { Link } from "react-router-dom";
 
 const RecentTransactions = () => {
   const allTransactions = useSelector(selectAllTransactions);
@@ -11,12 +12,25 @@ const RecentTransactions = () => {
 
   return (
     <div>
-      <p className="text-base md:text-[1.375rem] leading-[1.625rem] text-custom-primary-1 font-semibold mb-4">
-        Recent Transactions
-      </p>
-      <div className="space-y-4 p-6 bg-white rounded-[1.5625rem] pb-8">
+      <div className="flex justify-between items-center mb-4">
+        <p className="text-base md:text-[1.375rem] leading-[1.625rem] text-custom-primary-1 font-semibold">
+          Recent Transactions
+        </p>
+        <Link
+          to="/transactions"
+          className="text-sm md:text-[1.0625rem] leading-[1.25rem] text-custom-primary-1 font-semibold hover:underline"
+        >
+          See All
+        </Link>
+      </div>
+      <div className="space-y-4 p-6 bg-white rounded-[1.5625rem] pb-8 min-h-[10rem]">
         {transactions.length === 0 ? (
-          <p className="text-center text-[#718EBF] py-6 text-sm">No transactions yet.</p>
+          <div className="flex flex-col items-center justify-center py-8 gap-2">
+            <p className="text-[#718EBF] text-sm text-center">No transactions yet.</p>
+            <Link to="/transactions" className="text-xs text-[#343C6A] underline">
+              Add your first transaction →
+            </Link>
+          </div>
         ) : (
           transactions.map((transaction) => (
             <div key={transaction.id} className="flex justify-between items-center">
@@ -35,9 +49,9 @@ const RecentTransactions = () => {
                   </p>
                 </div>
               </div>
-              <p className={`text-[0.6875rem] md:text-[1rem] leading-5 font-semibold
-                ${transaction.type === "expense" ? "text-[#FF4B4A]" : "text-[#41D4A8]"}
-              `}>
+              <p className={`text-[0.6875rem] md:text-[1rem] leading-5 font-semibold ${
+                transaction.type === "expense" ? "text-[#FF4B4A]" : "text-[#41D4A8]"
+              }`}>
                 {transaction.type === "expense"
                   ? `- $${transaction.amount.toLocaleString()}`
                   : `+ $${transaction.amount.toLocaleString()}`}

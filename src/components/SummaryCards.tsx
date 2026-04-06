@@ -1,9 +1,8 @@
 import { useSelector } from "react-redux";
-import { selectMonthlyData, selectSummaryStats } from "../store/selectors/transactionSelectors";
+import { selectMonthlyData, selectSummaryStats, selectAllTransactions } from "../store/selectors/transactionSelectors";
 
 const fmt = (n: number) =>
-  "$" +
-  Math.abs(n).toLocaleString("en-US", {
+  "$" + Math.abs(n).toLocaleString("en-US", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
@@ -11,6 +10,7 @@ const fmt = (n: number) =>
 const SummaryCards = () => {
   const { balance, totalIncome, totalExpenses } = useSelector(selectSummaryStats);
   const monthlyData = useSelector(selectMonthlyData);
+  const allTransactions = useSelector(selectAllTransactions);
 
   const months = Object.keys(monthlyData).sort();
   const latest = months[months.length - 1] || "";
@@ -19,14 +19,27 @@ const SummaryCards = () => {
   const lm = monthlyData[latest] || { income: 0, expense: 0 };
   const pm = monthlyData[prev] || { income: 0, expense: 0 };
 
-  const incomeDiff =
-    pm.income > 0
-      ? Math.round(((lm.income - pm.income) / pm.income) * 100)
-      : 0;
-  const expenseDiff =
-    pm.expense > 0
-      ? Math.round(((lm.expense - pm.expense) / pm.expense) * 100)
-      : 0;
+  const incomeDiff = pm.income > 0
+    ? Math.round(((lm.income - pm.income) / pm.income) * 100)
+    : 0;
+  const expenseDiff = pm.expense > 0
+    ? Math.round(((lm.expense - pm.expense) / pm.expense) * 100)
+    : 0;
+
+  // Edge case: no transactions at all
+  if (allTransactions.length === 0) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
+        {["Total Balance", "Total Income", "Total Expenses"].map((label) => (
+          <div key={label} className="rounded-[1.5625rem] p-5 flex flex-col gap-1 bg-[#F5F7FA]">
+            <p className="text-[0.8125rem] font-medium text-[#718EBF]">{label}</p>
+            <p className="text-[1.5rem] font-bold text-[#343C6A]">$0.00</p>
+            <p className="text-xs text-[#718EBF] mt-1">No transactions yet</p>
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   const cards = [
     {
@@ -40,10 +53,9 @@ const SummaryCards = () => {
     {
       label: "Total Income",
       value: fmt(totalIncome),
-      sub:
-        incomeDiff >= 0
-          ? `↑ ${incomeDiff}% vs last month`
-          : `↓ ${Math.abs(incomeDiff)}% vs last month`,
+      sub: incomeDiff >= 0
+        ? `↑ ${incomeDiff}% vs last month`
+        : `↓ ${Math.abs(incomeDiff)}% vs last month`,
       trend: incomeDiff >= 0 ? "up" : "down",
       accent: "#41D4A8",
       bg: "#EDFAF6",
@@ -51,10 +63,9 @@ const SummaryCards = () => {
     {
       label: "Total Expenses",
       value: fmt(totalExpenses),
-      sub:
-        expenseDiff >= 0
-          ? `↑ ${expenseDiff}% vs last month`
-          : `↓ ${Math.abs(expenseDiff)}% vs last month`,
+      sub: expenseDiff >= 0
+        ? `↑ ${expenseDiff}% vs last month`
+        : `↓ ${Math.abs(expenseDiff)}% vs last month`,
       trend: expenseDiff > 0 ? "down" : "up",
       accent: "#FF4B4A",
       bg: "#FFF0F0",
@@ -66,30 +77,22 @@ const SummaryCards = () => {
       {cards.map(({ label, value, sub, trend, accent, bg }) => (
         <div
           key={label}
-          className="rounded-[1.5625rem] p-5 flex flex-col gap-1"
+          className="rounded-[1.5625rem] p-5 flex flex-col gap-1 transition-transform hover:scale-[1.02] cursor-default"
           style={{ backgroundColor: bg }}
         >
-          <p
-            className="text-[0.8125rem] font-medium"
-            style={{ color: "#718EBF" }}
-          >
+          <p className="text-[0.8125rem] font-medium" style={{ color: "#718EBF" }}>
             {label}
           </p>
-          <p
-            className="text-[1.5rem] font-bold leading-tight"
-            style={{ color: accent }}
-          >
+          <p className="text-[1.5rem] font-bold leading-tight" style={{ color: accent }}>
             {value}
           </p>
-          <p
-            className={`text-xs font-medium mt-1 ${
-              trend === "up"
-                ? "text-[#41D4A8]"
-                : trend === "down"
-                ? "text-[#FF4B4A]"
-                : "text-[#718EBF]"
-            }`}
-          >
+          <p className={`text-xs font-medium mt-1 ${
+            trend === "up"
+              ? "text-[#41D4A8]"
+              : trend === "down"
+              ? "text-[#FF4B4A]"
+              : "text-[#718EBF]"
+          }`}>
             {sub}
           </p>
         </div>

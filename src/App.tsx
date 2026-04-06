@@ -215,6 +215,16 @@ const App: React.FC<Props> = ({ assetMap }) => {
                           </Suspense>
                         }
                       />
+                      <Route
+                        path="*"
+                        element={
+                          <Suspense fallback={<PageLoader />}>
+                            {React.createElement(
+                              lazy(() => import("../src/pages/DashboardPage"))
+                            )}
+                          </Suspense>
+                        }
+                      />
                     </Routes>
                 </Router>
             </HelmetProvider>

@@ -1,13 +1,17 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const initialState: any = {
+interface MenuState {
+  menu: number;
+}
+
+const initialState: MenuState = {
   menu: 0,
 };
 
 export const subscribe = () => {};
 
 export const menuSlice = createSlice({
-  name: 'menu',
+  name: "menu",
   initialState,
   reducers: {
     updateMenu: (state, action: PayloadAction<number>): void => {
