@@ -14,6 +14,52 @@ A fully responsive financial dashboard where you can track income, expenses, inv
 - **Persistent State** — Transaction data survives page refresh via redux-persist
 - **Responsive** — Works on mobile, tablet, and desktop
 
+---
+
+
+## Features Description
+
+**Dashboard**
+- Summary cards for total balance, income, and expenses — calculated from real transaction data
+- Balance history area chart showing cumulative running balance month by month
+- Weekly activity bar chart grouped by actual transaction dates
+- Expense statistics pie chart from your top spending categories
+- Recent transactions pulled live from Redux, sorted by date
+- Quick Transfer creates a real transaction entry when you send
+
+**Transactions**
+- Search by description or category
+- Filter by type, category, and month independently
+- Click any column header to sort ascending or descending
+- Add, edit, delete transactions (Admin only) with confirmation prompts
+- Export current filtered view as CSV or JSON
+
+**Role Based UI**
+- Admin — full access to add, edit, delete, transfer
+- Viewer — read-only with a banner shown on every page
+- Switch using the dropdown in the navbar
+- Role always resets to Admin on page refresh by design
+
+**Insights**
+- Highest spending category with percentage of total expenses
+- Savings rate for the current month
+- Month-over-month expense comparison
+- Income vs expenses bar chart for last 6 months
+- Category ranking with horizontal bars and detail table
+
+**Dark Mode**
+- Toggle between light and dark with the sun/moon slider in the navbar
+- Preference saved to localStorage across sessions
+
+**Other**
+- Live search in navbar — results dropdown shows matching transactions instantly
+- All data persists across page refreshes via redux-persist
+- Empty state handling throughout — no blank screens when data is missing
+- Responsive layout across mobile, tablet, and desktop
+
+---
+
+
 ## Tech Stack
 
 - **Frontend:** React 18 + TypeScript
