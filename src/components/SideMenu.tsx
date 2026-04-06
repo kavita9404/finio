@@ -109,7 +109,7 @@ const SideMenu = () => {
       <div className="flex items-center h-[6.25rem] py-3 px-[2.5rem] mb-4 gap-4">
         <img src="/assets/icons/soar-logo.svg" alt="Logo" />
         <p className="self-center text-black whitespace-nowrap text-xl md:text-2xl font-extrabold">
-          Finance Manager
+          Finio
         </p>
       </div>
       {menus.map(({ title, link, icon }, index) => (
